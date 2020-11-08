@@ -291,80 +291,87 @@ def edit_translation(request, translation, instance):
             'url': reverse('wagtail_localize:machine_translate', args=[translation.id]),
         }
 
-    return render(request, 'wagtail_localize/admin/edit_translation.html', {
-        # These props are passed directly to the TranslationEditor react component
-        'props': json.dumps({
-            'object': {
-                'title': str(instance),
-                'isLive': is_live,
-                'isLocked': is_locked,
-                'lastPublishedDate': last_published_at.strftime('%-d %B %Y') if last_published_at is not None else None,
-                'lastPublishedBy': UserSerializer(last_published_by).data if last_published_by is not None else None,
-                'liveUrl': live_url,
-            },
-            'breadcrumb': breadcrumb,
-            'tabs': tab_helper.tabs_with_slugs,
-            'sourceLocale': {
-                'code': translation.source.locale.language_code,
-                'displayName': translation.source.locale.get_display_name(),
-            },
-            'locale': {
-                'code': translation.target_locale.language_code,
-                'displayName': translation.target_locale.get_display_name(),
-            },
-            'translations': [
-                {
-                    'title': str(translated_instance),
-                    'locale': {
-                        'code': translated_instance.locale.language_code,
-                        'displayName': translated_instance.locale.get_display_name(),
-                    },
-                    'editUrl': reverse('wagtailadmin_pages:edit', args=[translated_instance.id]) if isinstance(translated_instance, Page) else reverse('wagtailsnippets:edit', args=[translated_instance._meta.app_label, translated_instance._meta.model_name, quote(translated_instance.id)]),
-                }
-                for translated_instance in instance.get_translations().select_related('locale')
-            ],
-            'perms': {
-                'canPublish': can_publish,
-                'canUnpublish': can_unpublish,
-                'canLock': can_lock,
-                'canUnlock': can_unlock,
-                'canDelete': can_delete,
-            },
-            'links': {
-                'downloadPofile': reverse('wagtail_localize:download_pofile', args=[translation.id]),
-                'uploadPofile': reverse('wagtail_localize:upload_pofile', args=[translation.id]),
-                'unpublishUrl': reverse('wagtailadmin_pages:unpublish', args=[instance.id]) if isinstance(instance, Page) else None,
-                'lockUrl': reverse('wagtailadmin_pages:lock', args=[instance.id]) if isinstance(instance, Page) else None,
-                'unlockUrl': reverse('wagtailadmin_pages:unlock', args=[instance.id]) if isinstance(instance, Page) else None,
-                'deleteUrl': reverse('wagtailadmin_pages:delete', args=[instance.id]) if isinstance(instance, Page) else reverse('wagtailsnippets:delete', args=[instance._meta.app_label, instance._meta.model_name, quote(instance.pk)]),
-                'stopTranslationUrl': reverse('wagtail_localize:stop_translation', args=[translation.id]),
-            },
-            'previewModes': [
-                {
-                    'mode': mode,
-                    'label': label,
-                    'url': reverse('wagtail_localize:preview_translation', args=[translation.id]) if mode == instance.default_preview_mode else reverse('wagtail_localize:preview_translation', args=[translation.id, mode]),
-                }
-                for mode, label in (instance.preview_modes if isinstance(instance, Page) else [])
-            ],
-            'machineTranslator': machine_translator,
-            'segments': [
-                {
-                    'id': segment.id,
-                    'contentPath': segment.context.path,
-                    'source': segment.string.data,
-                    'location': get_segment_location_info(source_instance, tab_helper, segment),
-                    'editUrl': reverse('wagtail_localize:edit_string_translation', kwargs={'translation_id': translation.id, 'string_segment_id': segment.id}),
-                }
-                for segment in string_segments
-            ],
+    props = {
+        'object': {
+            'title': str(instance),
+            'isLive': is_live,
+            'isLocked': is_locked,
+            'lastPublishedDate': last_published_at.strftime('%-d %B %Y') if last_published_at is not None else None,
+            'lastPublishedBy': UserSerializer(last_published_by).data if last_published_by is not None else None,
+            'liveUrl': live_url,
+        },
+        'breadcrumb': breadcrumb,
+        'tabs': tab_helper.tabs_with_slugs,
+        'sourceLocale': {
+            'code': translation.source.locale.language_code,
+            'displayName': translation.source.locale.get_display_name(),
+        },
+        'locale': {
+            'code': translation.target_locale.language_code,
+            'displayName': translation.target_locale.get_display_name(),
+        },
+        'translations': [
+            {
+                'title': str(translated_instance),
+                'locale': {
+                    'code': translated_instance.locale.language_code,
+                    'displayName': translated_instance.locale.get_display_name(),
+                },
+                'editUrl': reverse('wagtailadmin_pages:edit', args=[translated_instance.id]) if isinstance(translated_instance, Page) else reverse('wagtailsnippets:edit', args=[translated_instance._meta.app_label, translated_instance._meta.model_name, quote(translated_instance.id)]),
+            }
+            for translated_instance in instance.get_translations().select_related('locale')
+        ],
+        'perms': {
+            'canPublish': can_publish,
+            'canUnpublish': can_unpublish,
+            'canLock': can_lock,
+            'canUnlock': can_unlock,
+            'canDelete': can_delete,
+        },
+        'links': {
+            'downloadPofile': reverse('wagtail_localize:download_pofile', args=[translation.id]),
+            'uploadPofile': reverse('wagtail_localize:upload_pofile', args=[translation.id]),
+            'unpublishUrl': reverse('wagtailadmin_pages:unpublish', args=[instance.id]) if isinstance(instance, Page) else None,
+            'lockUrl': reverse('wagtailadmin_pages:lock', args=[instance.id]) if isinstance(instance, Page) else None,
+            'unlockUrl': reverse('wagtailadmin_pages:unlock', args=[instance.id]) if isinstance(instance, Page) else None,
+            'deleteUrl': reverse('wagtailadmin_pages:delete', args=[instance.id]) if isinstance(instance, Page) else reverse('wagtailsnippets:delete', args=[instance._meta.app_label, instance._meta.model_name, quote(instance.pk)]),
+            'stopTranslationUrl': reverse('wagtail_localize:stop_translation', args=[translation.id]),
+        },
+        'previewModes': [
+            {
+                'mode': mode,
+                'label': label,
+                'url': reverse('wagtail_localize:preview_translation', args=[translation.id]) if mode == instance.default_preview_mode else reverse('wagtail_localize:preview_translation', args=[translation.id, mode]),
+            }
+            for mode, label in (instance.preview_modes if isinstance(instance, Page) else [])
+        ],
+        'machineTranslator': machine_translator,
+        'segments': [
+            {
+                'id': segment.id,
+                'contentPath': segment.context.path,
+                'source': segment.string.data,
+                'location': get_segment_location_info(source_instance, tab_helper, segment),
+                'editUrl': reverse('wagtail_localize:edit_string_translation', kwargs={'translation_id': translation.id, 'string_segment_id': segment.id}),
+            }
+            for segment in string_segments
+        ],
 
-            # We serialize the translation data using Django REST Framework.
-            # This gives us a consistent representation with the APIs so we
-            # can dynamically update translations in the view.
-            'initialStringTranslations': StringTranslationSerializer(string_translations, many=True, context={'translation_source': translation.source}).data,
-        }, cls=DjangoJSONEncoder)
-    })
+        # We serialize the translation data using Django REST Framework.
+        # This gives us a consistent representation with the APIs so we
+        # can dynamically update translations in the view.
+        'initialStringTranslations': StringTranslationSerializer(string_translations, many=True, context={'translation_source': translation.source}).data,
+    }
+
+    try:
+        from wagtail.shell.middleware import ShellResponseRender
+        return ShellResponseRender('wagtail_localize.edit_translation', props)
+
+    except ImportError:
+        return render(request, 'wagtail_localize/admin/edit_translation.html', {
+            # These props are passed directly to the TranslationEditor react component
+            'props': json.dumps(props, cls=DjangoJSONEncoder)
+        })
 
 
 def user_can_edit_instance(user, instance):

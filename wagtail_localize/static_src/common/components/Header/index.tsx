@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import Icon from '../Icon';
-import gettext from 'gettext';
 
 interface HeaderButtonActionProps {
     label: string;

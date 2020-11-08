@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import gettext from 'gettext';
 
 import Avatar from '../../../common/components/Avatar';
 

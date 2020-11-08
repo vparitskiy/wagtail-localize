@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import gettext from 'gettext';
 
 import Icon from '../../../common/components/Icon';
 import Avatar from '../../../common/components/Avatar';

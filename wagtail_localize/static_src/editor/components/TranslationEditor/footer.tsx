@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import gettext from 'gettext';
 
 import Icon from '../../../common/components/Icon';
 import ActionMenu from '../../../common/components/ActionMenu';

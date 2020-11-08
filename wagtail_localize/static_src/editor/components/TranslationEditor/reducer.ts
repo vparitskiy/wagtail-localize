@@ -1,5 +1,3 @@
-import gettext from 'gettext';
-
 import { StringTranslationAPI, StringTranslation } from '.';
 
 export interface EditorState {

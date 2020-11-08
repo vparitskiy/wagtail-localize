@@ -28,3 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Register as a shell view
+registerShellView('wagtail_localize.edit_translation', (props, csrfToken) => {
+    return (
+        <TranslationEditor
+            csrfToken={csrfToken}
+            {...props}
+        />
+    )
+});
