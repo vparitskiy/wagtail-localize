@@ -199,6 +199,14 @@ const TranslationEditor: FunctionComponent<EditorProps> = props => {
         );
     }
 
+    React.useEffect(() => {
+        document.body.classList.add('page-editor');
+
+        return () => {
+            document.body.classList.remove('page-editor');
+        }
+    }, []);
+
     return (
         <>
             <EditorHeader {...props} {...state} />
