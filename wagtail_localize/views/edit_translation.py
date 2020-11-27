@@ -364,7 +364,7 @@ def edit_translation(request, translation, instance):
     }
 
     try:
-        from wagtail.shell.middleware import ShellResponseRender
+        from wagtail_shell.middleware import ShellResponseRender
         return ShellResponseRender('wagtail_localize.edit_translation', props)
 
     except ImportError:
