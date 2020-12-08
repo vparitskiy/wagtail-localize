@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring translatable fields &mdash; Wagtail Localize  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Wagtail Localize  documentation" href="index.html"/>
+        <link rel="next" title="Tree synchronisation" href="treesync.html"/>
+        <link rel="prev" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Wagtail Localize
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#enable-wagtail-s-and-django-s-internationalisation-features">Enable Wagtail’s and Django’s internationalisation features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-wagtail-localize">Install Wagtail Localize</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuring translatable fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treesync.html">Tree synchronisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/index.html">How to guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ref/models.html">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ref/models.html#strings-and-translations">Strings and Translations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#string"><code class="docutils literal notranslate"><span class="pre">String</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#stringtranslation"><code class="docutils literal notranslate"><span class="pre">StringTranslation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#translationcontext"><code class="docutils literal notranslate"><span class="pre">TranslationContext</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#template"><code class="docutils literal notranslate"><span class="pre">Template</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ref/models.html#translation-workflow">Translation workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#translatableobject"><code class="docutils literal notranslate"><span class="pre">TranslatableObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#translationsource"><code class="docutils literal notranslate"><span class="pre">TranslationSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#translation"><code class="docutils literal notranslate"><span class="pre">Translation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#translationlog"><code class="docutils literal notranslate"><span class="pre">TranslationLog</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ref/models.html#segments">Segments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#stringsegment"><code class="docutils literal notranslate"><span class="pre">StringSegment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#templatesegment"><code class="docutils literal notranslate"><span class="pre">TemplateSegment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#relatedobjectsegment"><code class="docutils literal notranslate"><span class="pre">RelatedObjectSegment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#overridablesegment"><code class="docutils literal notranslate"><span class="pre">OverridableSegment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#segmentoverride"><code class="docutils literal notranslate"><span class="pre">SegmentOverride</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ref/models.html#tree-synchronisation">Tree synchronisation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ref/models.html#localesynchronization"><code class="docutils literal notranslate"><span class="pre">LocaleSynchronization</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ref/utils/index.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ref/utils/strings.html">Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ref/utils/segments.html">Segments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Wagtail Localize</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuring translatable fields</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/fieldconfig.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-translatable-fields">
+<h1>Configuring translatable fields<a class="headerlink" href="#configuring-translatable-fields" title="Permalink to this headline">¶</a></h1>
+<p>Each field on a model can either be configured as synchronised or translatable:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>synchronised fields are copied, but can be overridden</p></li>
+<li><p>translatable fields can be translated</p></li>
+</ul>
+</div></blockquote>
+<p>Out of the box, Wagtail Localize works out which category each field should be
+automatically following</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="treesync.html" class="btn btn-neutral float-right" title="Tree synchronisation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Torchbox.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
